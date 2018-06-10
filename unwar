@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+if [[ $# -eq 0 ]]; then
+    echo "usage: $0 foo.war" > /dev/stderr
+    echo "Extracts Web Archive files into a new directory with the same basename, if something by that name doesn't already exist." > /dev/stderr
+    echo "For example, foo.war gets extracted into foo" > /dev/stderr
+    exit 0
+fi
+
+dname=$(realpath $(basename "$@" .war))
+
+if [[ -a $dname ]]; then
+    echo "$0: $dname already exists" > /dev/stderr
+    exit 1
+fi
+
+mkdir $dname && cp "$@" $dname && cd $dname && tar -zxf "$@"
