@@ -7,7 +7,7 @@ if [[ $# -eq 0 ]]; then
     exit 0
 fi
 
-dname=$(realpath $(basename "$@" .war))
+dname=$(realpath "$(basename "$@" .war)")
 
 if [[ -a $dname ]]; then
     echo "$0: $dname already exists" > /dev/stderr
